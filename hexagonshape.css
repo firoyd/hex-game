@@ -1,0 +1,235 @@
+.hexagon {
+  position: relative;
+  width: 30px; 
+  height: 17.32px;
+  background-color: green;
+  margin: 8.66px 0;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 8.66px solid green;
+}
+
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 8.66px solid green;
+}
+
+body, html {
+	width:100%;
+	height:100%;
+	margin:0;
+}
+
+.container {
+	position:relative;
+}
+.hexagn {
+  position: relative;
+  width: 30px; 
+  height: 17.32px;
+  background-color: red;
+  margin: 8.66px 0;
+}
+
+.hexagn:before,
+.hexagn:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.hexagn:before {
+  bottom: 100%;
+  border-bottom: 8.66px solid red;
+}
+
+.hexagn:after {
+  top: 100%;
+  width: 0;
+  border-top: 8.66px solid red;
+}
+.hexa {
+  position: relative;
+  width: 30px; 
+  height: 17.32px;
+  background-color: blue;
+  margin: 8.66px 0;
+}
+
+.hexa:before,
+.hexa:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.hexa:before {
+  bottom: 100%;
+  border-bottom: 8.66px solid blue;
+}
+
+.hexa:after {
+  top: 100%;
+  width: 0;
+  border-top: 8.66px solid blue;
+}
+
+.rectangle {
+	margin:20px 0 0 45px;
+	width: 130px;
+	height: 40px;
+	float:left
+}
+
+.rectangle2 {
+	margin:20px 1px 0 0;
+	width: 130px;
+	height: 40px;
+	float:left;
+}
+
+.triangle-right {
+	width: 0;
+	height: 0;
+	margin:20px 0 0 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	float:left;
+}
+
+.triangle-topright {
+	width: 0;
+	height: 0;
+	margin-top:20px;
+	margin-left:-40px;
+	border-left: 40px solid transparent;
+	float:left;
+
+}
+
+.triangle-bottomright {
+	width: 0;
+	height: 0;
+	margin-top:40px;
+	margin-left:-40px;
+	border-left: 40px solid transparent;
+	float:left;
+}
+
+#pop {
+	height : 80px;
+	width:250px;
+	position:fixed;
+	bottom:55%;
+	right:40%;
+	border:2px solid red;
+	padding:10px;
+	background:#036;
+	border-radius:3px;
+}
+
+#close {
+	margin-right:6px;
+	margin-top:6px;
+	float:right;
+}
+
+.mavi {
+	background:#3FF url(warning.png) no-repeat 4px 3px;
+	height:35px;
+	width:270px;
+	position:fixed;
+	margin-top:-10px;
+	margin-left:-10px;
+}
+
+.yesil {
+	background:#0F0 url(ok.png) no-repeat 4px 3px;
+	height:35px;
+	width:270px;
+	position:fixed;
+	margin-top:-10px;
+	margin-left:-10px	
+}
+
+#successRed {
+	height : 80px;
+	width:250px;
+	position:fixed;
+	bottom:55%;
+	right:40%;
+	border:2px solid red;
+	padding:10px;
+	background:#036;
+	border-radius:3px;
+}
+
+#successBlue {
+	height : 80px;
+	width:250px;
+	position:fixed;
+	bottom:55%;
+	right:40%;
+	border:2px solid red;
+	padding:10px;
+	background:#036;
+	border-radius:3px;
+}
+
+#gamereset {
+	position:absolute;
+	margin-left:0px;
+	margin-top:400px;	
+}
+
+.active-player {
+	background-color:red;
+}
+
+.deactive-player {
+	background-color:gray;
+}
+
+.active1 {
+	border-left: 40px solid red;
+}
+
+.active2 {
+	border-bottom: 20px solid gray;
+}
+
+.active3 {
+	
+	border-top: 20px solid gray;
+}
+
+.deactive1 {
+	border-left: 40px solid gray;
+}
+
+.deactive2 {
+	border-bottom: 20px solid red;
+}
+
+.deactive3 {
+	
+	border-top: 20px solid red;
+}
+
+

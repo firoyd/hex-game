@@ -1,0 +1,373 @@
+<html>
+<head>
+<title>Hex - Pélagie Birds</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="hexagonshape.css">
+<script type="text/javascript" src="jquery-ui.js"></script>
+</head>
+
+<body>
+<div class="container" id="container"></div>
+<div>
+  <div class="rectangle active-player">
+    <p style="text-align:center; margin-top:7px; font-size:20px">1. Player ↓</p>
+  </div>
+  <div class="triangle-right active1"></div>
+  <div class="triangle-bottomright active2"></div>
+  <div class="triangle-topright active3"></div>
+  <div class="rectangle2 deactive-player">
+    <p style="text-align:center; margin-top:7px; font-size:20px;">2. Player →</p>
+  </div>
+</div>
+
+
+<div id="pop" style="visibility:hidden">
+    <div class="mavi">
+        <button id="close" onClick="document.getElementById('pop').style.visibility='hidden'">X</button>
+        
+        <b><p style="font-size:20px; font-family:'Comic Sans MS', cursive; margin-top:3px; margin-left:70px; ">
+        WARNING
+        </p></b>
+    </div>
+
+	<b><p style="font-size:15px; font-family:'Comic Sans MS', cursive; margin-top:38px; color:#FFF; text-align:center">
+	YOU SHOULD CLICK ON ANY OTHER HEX'S
+	</p></b>
+</div>
+
+<div id="successRed" style="visibility:hidden">
+    <div class="yesil">
+        <button id="close" onClick="document.getElementById('successRed').style.visibility='hidden'">X</button>
+        
+        <b><p style="font-size:20px; font-family:'Comic Sans MS', cursive; margin-top:3px; margin-left:70px; ">
+        SUCCESS
+        </p></b>
+    </div>
+
+	<b><p style="font-size:18px; font-family:'Comic Sans MS', cursive; margin-top:38px; color:#FFF; text-align:center">
+	1. Player Wins
+	</p></b>
+</div>
+
+<div id="successBlue" style="visibility:hidden">
+    <div class="yesil">
+        <button id="close" onClick="document.getElementById('successBlue').style.visibility='hidden'">X</button>
+        
+        <b><p style="font-size:20px; font-family:'Comic Sans MS', cursive; margin-top:3px; margin-left:70px; ">
+        SUCCESS
+        </p></b>
+    </div>
+
+	<b><p style="font-size:15px; font-family:'Comic Sans MS', cursive; margin-top:38px; color:#FFF; text-align:center">
+	2. Player Wins
+	</p></b>
+</div>
+
+<button id="gamereset" onClick="gameReset()">New Game</button>
+
+<script type="text/javascript">
+ 
+var k = 0;
+var allRed = [];
+var allBlue = [];
+var checkArray = [];
+var ahmet = false ;
+var mehmet = false ;
+var ahmeta = false ;
+var mehmeta = false ;
+var furkan = false;
+
+function createHoney (x,y) {
+	var cont = document.getElementById("container");
+	for ( i=0 ; i<11 ; i++ ) {
+		var jdiv = document.createElement("div"); 
+		var xAxis =  (40+i*30+ k*15);
+		jdiv.setAttribute("class","hexagon") ;	
+		jdiv.style.position="absolute";
+		jdiv.style.top=+y+75+"px";
+		jdiv.style.left=+xAxis+i+"px";
+		cont.appendChild(jdiv);
+		jdiv.setAttribute( "id" , i+"_"+j );
+		jdiv.onclick = function() {
+			change(this.id);
+		}
+	}
+	k++;
+}
+
+for ( j=0 ; j<11 ; j++ ) {
+	 createHoney(1,j*27); 
+};
+
+//Rengini değiştir
+function change (hasan) {
+	if (furkan!=true) {
+		var a = $("#" + hasan);
+		if ( (allRed.length+allBlue.length)%2 ==0 ) {
+			if (a.hasClass('hexagon') == true) {
+				allRed.push(hasan);
+					a
+			.removeClass('hexagon')
+			.addClass('hexagn');		
+			kontrolRed();
+			$('.rectangle').switchClass("active-player","deactive-player");
+			$('.triangle-right').switchClass("active1","deactive1");
+			$('.triangle-topright').switchClass("active3","deactive3");
+			$('.triangle-bottomright').switchClass("active2","deactive2");;
+			$('.rectangle2').switchClass("deactive-player","active-player");
+			}
+			else  document.getElementById("pop").style.visibility="visible";
+		}
+		
+		else {
+			if (a.hasClass('hexagon') == true) {
+				allBlue.push(hasan);
+				a
+		 .removeClass('hexagon')
+		 .addClass('hexa');	
+		 kontrolBlue();
+			$('.rectangle').switchClass("deactive-player","active-player");
+			$('.triangle-right').switchClass("deactive1","active1");
+			$('.triangle-topright').switchClass("deactive3","active3");
+			$('.triangle-bottomright').switchClass("deactive2","active2");;
+			$('.rectangle2').switchClass("active-player","deactive-player");
+		 
+			}	
+			else document.getElementById("pop").style.visibility="visible"; 
+		}
+	}
+}
+
+
+//Checking if the object exists in the specific array
+function include(arr,obj) {
+    for(var i=0; i<arr.length; i++) {
+        if (arr[i] == obj) return true; 
+	};
+	return false ; 
+}
+
+//Call gameEndRed	
+function kontrolRed () {
+	if ( allRed.length >= 11 && ahmet == true && mehmet == true ) {
+		checkArray.splice(0,checkArray.length);
+	
+		for ( h=0 ; h<11 ; h++ ) {
+			if ( include( allRed, (h+"_"+0) ) == true ) gameEndRed(h+"_"+0); 
+		}
+	}
+}	
+
+//Checking does the game over
+function gameEndRed (game) {
+	debugger ;
+	checkArray.push(game);
+	var x = "" ;
+	var y = "" ;
+	
+	function ayirma () {
+		x = +game.split("_")[0];
+		y = +game.split("_")[1]; 
+	};
+	
+	ayirma ();
+	
+	
+	if ( furkan != true && include(allRed,((x+1)+"_"+y ))== true && include(checkArray,( (x+1)+"_"+y ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndRed( (x+1)+"_"+y );
+	}
+		
+	if ( furkan != true && include(allRed,((x-1)+"_"+y ))== true && include(checkArray,( (x-1)+"_"+y ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndRed( (x-1)+"_"+y );
+	}
+				
+	if ( furkan != true && include(allRed,(x+"_"+(y+1) ))== true && include(checkArray,( x+"_"+(y+1) ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}	
+		else gameEndRed( x+"_"+(y+1) );
+	}
+				
+	if ( furkan != true && include(allRed,((x+1)+"_"+(y-1) ))== true && include(checkArray,( (x+1)+"_"+(y-1) ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}	
+		else gameEndRed( (x+1)+"_"+(y-1) );
+	}
+				
+	if ( furkan != true && include(allRed,(x+"_"+(y-1) ))== true && include(checkArray,( x+"_"+(y-1) ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}	
+		else gameEndRed( x+"_"+(y-1) );
+	}
+				
+	if ( furkan != true && include(allRed,((x-1)+"_"+(y+1) ))== true && include(checkArray,( (x-1)+"_"+(y+1) ))==false ) {
+		if (y==10) {
+			document.getElementById("successRed").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndRed( (x-1)+"_"+(y+1));
+	}
+	if (y==10) {
+		document.getElementById("successRed").style.visibility="visible";
+		return furkan=true ;
+	}
+	
+}
+
+for ( k=0 ; k<11 ; k++ ) {
+	document.getElementById(k+'_0');
+	$("#" +k+"_"+0).on("click",function () {
+		ahmet=true;
+	})
+}	
+
+
+for ( k=0 ; k<11 ; k++ ) {
+	document.getElementById(k+'_10');
+	$("#" +k+"_"+0).on("click",function () {
+		mehmet=true;
+	})
+}	
+
+
+
+//Call gameEndBlue	
+function kontrolBlue () {
+	if ( allBlue.length >= 11 && ahmeta == true && mehmeta == true ) {
+		checkArray.splice(0,checkArray.length);
+	
+		for ( h=0 ; h<11 ; h++ ) {
+			if ( include( allBlue, ("0_"+h) ) == true ) gameEndBlue("0_"+h); 
+		}
+	}
+}	
+
+//Checking does the game over
+function gameEndBlue (game) {
+	checkArray.push(game);
+	var x = "" ;
+	var y = "" ;
+	
+	function ayirma () {
+		x = +game.split("_")[0];
+		y = +game.split("_")[1];
+	};
+	
+	ayirma ();
+	
+	
+	if ( furkan != true && include(allBlue,((x+1)+"_"+y ))== true && include(checkArray,( (x+1)+"_"+y ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( (x+1)+"_"+y );
+	}
+	
+	if ( furkan != true && include(allBlue,((x-1)+"_"+y ))== true && include(checkArray,( (x-1)+"_"+y ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( (x-1)+"_"+y );
+	}
+			
+	if ( furkan != true && include(allBlue,(x+"_"+(y+1) ))== true && include(checkArray,( x+"_"+(y+1) ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( x+"_"+(y+1) );
+	}
+			
+	if ( furkan != true && include(allBlue,((x+1)+"_"+(y-1) ))== true && include(checkArray,( (x+1)+"_"+(y-1) ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( (x+1)+"_"+(y-1) );
+	}
+			
+	if ( furkan != true && include(allBlue,(x+"_"+(y-1) ))== true && include(checkArray,( x+"_"+(y-1) ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( x+"_"+(y-1) );
+	}
+			
+	if ( furkan != true && include(allBlue,((x-1)+"_"+(y+1) ))== true && include(checkArray,( (x-1)+"_"+(y-1) ))==false ) {
+		if (x==10) {
+			document.getElementById("successBlue").style.visibility="visible";
+			return furkan=true ;
+		}
+		else gameEndBlue( (x-1)+"_"+(y+1));
+	}
+}
+
+for ( j=0 ; j<11 ; j++ ) {
+	document.getElementById('0_'+j);
+	$("#" +"0_"+j).on("click",function () {
+		ahmeta=true;
+	})
+}	
+
+
+for ( l=0 ; l<11 ; l++ ) {
+	document.getElementById('10_'+l);
+	$("#" +"10_"+l).on("click",function () {
+		mehmeta=true;
+	})
+}	
+
+function gameReset () {
+	debugger ;
+	for ( i=0 ; i<allRed.length ; i++ ) {
+		var c = allRed[i];
+		var a = $("#" + c);
+				a
+	 	.removeClass('hexagn')
+	 	.addClass('hexagon');	
+		a = "";
+		c = "";
+	}
+	
+	for ( i=0 ; i<allBlue.length ; i++ ) {
+		var c = allBlue[i]
+		var b = $("#" + c);
+				b
+	 	.removeClass('hexa')
+	 	.addClass('hexagon');	
+		b = "";
+		c = "";
+	}
+	if ((allRed.length+ allBlue.length)%2==1) {
+		$('.rectangle').switchClass("deactive-player","active-player");
+		$('.triangle-right').switchClass("deactive1","active1");
+		$('.triangle-topright').switchClass("deactive3","active3");
+		$('.triangle-bottomright').switchClass("deactive2","active2");;
+		$('.rectangle2').switchClass("active-player","deactive-player");
+	}
+	allRed.splice( 0, allRed.length );
+	allBlue.splice( 0, allBlue.length );
+	furkan = false ;
+	
+}
+	
+</script>
+</body>
+</html>
